@@ -1,101 +1,25 @@
+'use client';
+
 import Image from "next/image";
+import { RetroGrid } from "@/components/magicui/retro-grid";
+import React from "react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div>
+      <RetroGrid/>
+        <div className="font-gofteh flex justify-center items-center flex-col mx-auto w-96 py-60">
+          <Image src="/images/logo.png" className="w-52 mb-10" width={200} height={200} alt="logo" />
+          <p className="text-center w-96 text-base">
+            لیست کارهایی که قرار تو روز انجام بدی رو بنویس و برنامه ریزی کن تا راحت تر و سریع تر پیش بره کارهات :)
+          </p>
+          <button className="w-80 mt-5 h-10 flex justify-center items-center gap-2 rounded-md">
+            <p className="text-black">بریم باهم شروع کنیم</p>
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.7807 8.25442L4.16086 8.25442L10.1112 2.14416C10.5867 1.65584 10.5867 0.854492 10.1112 0.366172C9.99835 0.250097 9.86436 0.158008 9.71685 0.0951756C9.56935 0.0323432 9.41122 1.64551e-06 9.25153 1.61759e-06C9.09184 1.58967e-06 8.93371 0.032343 8.78621 0.0951754C8.6387 0.158008 8.50471 0.250097 8.39191 0.366171L0.356582 8.61753C0.243547 8.73337 0.153868 8.87096 0.092681 9.02243C0.0314937 9.1739 -1.63241e-06 9.33628 -1.66108e-06 9.50026C-1.68975e-06 9.66425 0.0314936 9.82663 0.0926809 9.9781C0.153868 10.1296 0.243546 10.2672 0.356582 10.383L8.39191 18.6344C8.50479 18.7503 8.63881 18.8422 8.7863 18.905C8.9338 18.9677 9.09188 19 9.25153 19C9.41117 19 9.56926 18.9677 9.71675 18.905C9.86425 18.8422 9.99826 18.7503 10.1111 18.6344C10.224 18.5184 10.3136 18.3808 10.3747 18.2294C10.4358 18.0779 10.4672 17.9156 10.4672 17.7516C10.4672 17.5877 10.4358 17.4254 10.3747 17.2739C10.3136 17.1224 10.224 16.9848 10.1111 16.8689L4.16086 10.7586L17.7807 10.7586C18.4513 10.7586 19 10.1952 19 9.50653C19 8.81787 18.4513 8.25442 17.7807 8.25442Z" fill="black" />
+            </svg>
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
