@@ -3,6 +3,7 @@ import { RetroGrid } from '@/components/magicui/retro-grid'
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { useState , useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface DataType {
@@ -12,8 +13,15 @@ interface DataType {
 
 export default function Page() {
 
-    const router = useRouter()
-    const token = localStorage.getItem('token')
+    const [token, setToken] = useState<string | null>(null);
+    const router = useRouter();
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+      }
+    }, [router]);
 
     async function loginUser(event: React.MouseEvent<HTMLFormElement>) {
         event.preventDefault()
