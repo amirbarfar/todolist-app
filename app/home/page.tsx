@@ -4,7 +4,7 @@ import CreateTask from "@/components/tabs/createTask";
 import Search from "@/components/tabs/search";
 import Today from "@/components/tabs/today";
 import Charts from '@/components/tabs/Charts'
-import React, { useState } from "react"
+import React, { useState , useEffect } from "react"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
@@ -23,12 +23,18 @@ export default function Page() {
     }
   };
 
-  const token = localStorage.getItem('token')
+  const [token, setToken] = useState<string | null>(null);
 
-  if(!token){
-    router.push('/login')
-  }
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem('token');
+      setToken(storedToken);
 
+      if (!storedToken) {
+        router.push('/login');
+      }
+    }
+  }, []);
 
   async function logout() {
     const response = await fetch(('https://todo.zmat24.ir/api/logout'), {
@@ -47,7 +53,6 @@ export default function Page() {
     toast.loading('لطفا چند لحطه صبر کن بفرستمت بیرون :(' , {duration : 3000})
   }else{
     console.log('خطایی داریم :(');
-    
   }
 
   }
