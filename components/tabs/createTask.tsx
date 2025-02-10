@@ -1,10 +1,6 @@
-import React, { useState } from 'react'
-import { Calendar } from "@/components/ui/calendar"
-
+import React from 'react'
 
 export default function tab1(props: any) {
-    const [date, setDate] = React.useState<Date | undefined>(new Date())
-    const [calendar, setCalendar] = useState(false)
     return (
         <div className="w-full min-h-screen absolute py-10 px-12">
             <div className="mb-5">

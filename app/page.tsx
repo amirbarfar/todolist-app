@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 export default function Home() {
   const router = useRouter()
 
-  async function checkUser(event: React.MouseEvent<HTMLButtonElement> | undefined) {
+  async function checkUser() {
     const token = localStorage.getItem('token')
 
     const response = await fetch('https://todo.zmat24.ir/api/me', {

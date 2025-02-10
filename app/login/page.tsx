@@ -10,7 +10,7 @@ interface DataType {
     password: string
 }
 
-export default function page() {
+export default function Page() {
 
     const router = useRouter()
     const token = localStorage.getItem('token')

@@ -1,7 +1,6 @@
 "use client";
 
 import { RetroGrid } from '@/components/magicui/retro-grid'
-import { Box } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/navigation';

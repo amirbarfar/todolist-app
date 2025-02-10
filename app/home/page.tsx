@@ -7,8 +7,9 @@ import Charts from '@/components/tabs/Charts'
 import React, { useState } from "react"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
-export default function page() {
+export default function Page() {
 
   const router = useRouter()
 
@@ -29,7 +30,7 @@ export default function page() {
   }
 
 
-  async function logout(event:React.MouseEvent<HTMLButtonElement>) {
+  async function logout() {
     const response = await fetch(('https://todo.zmat24.ir/api/logout'), {
       method: "POST",
       headers: {
@@ -56,7 +57,7 @@ export default function page() {
       <label onClick={() => setUserInformation(false)} className={` ${userInformation ? "block" : "hidden"} w-dvw z-10 top-0 left-0  h-dvh absolute opacity-60 bg-black`}>close</label>
       <div className="bg-[#f8f8f8c6] min-w-80 min-h-screen">
         <div onClick={(() => setUserInformation(true))} className="flex justify-start p-2 hover:cursor-pointer relative items-center gap-1">
-          <img className="w-14 h-14 bg-slate-300 rounded-full" src="#" alt="" />
+          <Image src={"/images/logo.png"} alt="Logo" className="w-14 h-14 bg-slate-300 rounded-full" width={56} height={56} />
           <p className="text-lg">امیرحسین برفر</p>
           <svg className={`${userInformation ? 'rotate-180' : ""} transform`} width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 9.17C16.8126 8.98375 16.5592 8.87921 16.295 8.87921C16.0308 8.87921 15.7774 8.98375 15.59 9.17L12 12.71L8.46001 9.17C8.27265 8.98375 8.0192 8.87921 7.75501 8.87921C7.49082 8.87921 7.23737 8.98375 7.05001 9.17C6.95628 9.26297 6.88189 9.37357 6.83112 9.49543C6.78035 9.61729 6.75421 9.74799 6.75421 9.88C6.75421 10.012 6.78035 10.1427 6.83112 10.2646C6.88189 10.3864 6.95628 10.497 7.05001 10.59L11.29 14.83C11.383 14.9237 11.4936 14.9981 11.6154 15.0489C11.7373 15.0997 11.868 15.1258 12 15.1258C12.132 15.1258 12.2627 15.0997 12.3846 15.0489C12.5064 14.9981 12.617 14.9237 12.71 14.83L17 10.59C17.0937 10.497 17.1681 10.3864 17.2189 10.2646C17.2697 10.1427 17.2958 10.012 17.2958 9.88C17.2958 9.74799 17.2697 9.61729 17.2189 9.49543C17.1681 9.37357 17.0937 9.26297 17 9.17Z" fill="black" /></svg>
         </div>
@@ -68,7 +69,7 @@ export default function page() {
             </div>
             <form action="" className="flex justify-start items-center flex-col gap-2">
               <label htmlFor="profileImg">
-                <img className="rounded-full shadow size-24" src="/images/logo.png" />
+              <Image src={"/images/logo.png"} alt="Logo" className="rounded-full shadow-xl size-24" width={56} height={56} />
               </label>
               <input id="profileImg" className="hidden" type="file" required />
               <input className="w-full p-2 h-11 rounded-lg border-[#ddd] border-2 input input-sm" type="text" required placeholder="تغییر اسم :" />
