@@ -40,7 +40,7 @@ export default function Home() {
       <RetroGrid />
       <div className="font-gofteh flex justify-center items-center flex-col mx-auto w-96 py-60">
         <Image src="/images/logo.png" className="w-52 mb-10" width={200} height={200} alt="logo" />
-        <p className="text-center w-96 text-base">
+        <p className="text-center w-80 text-base">
           لیست کارهایی که قرار تو روز انجام بدی رو بنویس و برنامه ریزی کن تا راحت تر و سریع تر پیش بره کارهات :)
         </p>
         <button onClick={checkUser} className="w-80 mt-5 h-10 flex justify-center items-center gap-2 rounded-md">

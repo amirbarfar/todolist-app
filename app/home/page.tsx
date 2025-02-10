@@ -4,7 +4,7 @@ import CreateTask from "@/components/tabs/createTask";
 import Search from "@/components/tabs/search";
 import Today from "@/components/tabs/today";
 import Charts from '@/components/tabs/Charts'
-import React, { useState , useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
@@ -16,6 +16,7 @@ export default function Page() {
   const [userInformation, setUserInformation] = useState(false)
   const [newCategory, setNewCategory] = useState(false)
   const [activeTab, setActiveTab] = useState<React.ReactElement>()
+  const [mobileToggle, setMobileToggle] = useState(false)
 
   const parentHandelBack = (e: unknown) => {
     if (!e) {
@@ -40,52 +41,52 @@ export default function Page() {
     const response = await fetch(('https://todo.zmat24.ir/api/logout'), {
       method: "POST",
       headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Provider: "JYozs70KBkJJmNsmPJIjiRdKmmPd3f",
-          Authorization : `Bearer ${token}`
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Provider: "JYozs70KBkJJmNsmPJIjiRdKmmPd3f",
+        Authorization: `Bearer ${token}`
       },
-  })
+    })
 
-  if (response.ok) {
-    router.push('/login');
-    localStorage.clear();
-    toast.loading('لطفا چند لحطه صبر کن بفرستمت بیرون :(' , {duration : 3000})
-  }else{
-    console.log('خطایی داریم :(');
-  }
+    if (response.ok) {
+      router.push('/login');
+      localStorage.clear();
+      toast.loading('لطفا چند لحطه صبر کن بفرستمت بیرون :(', { duration: 3000 })
+    } else {
+      console.log('خطایی داریم :(');
+    }
 
   }
 
   return (
     <div className="font-pelak flex justify-start items-start">
       <label onClick={() => setUserInformation(false)} className={` ${userInformation ? "block" : "hidden"} w-dvw z-10 top-0 left-0  h-dvh absolute opacity-60 bg-black`}>close</label>
-      <div className="bg-[#f8f8f8c6] min-w-80 min-h-screen">
+      <div className={`max-lg:${mobileToggle ? "right-0 translate-x-0 opacity-100" : "-right-80 translate-x-full opacity-0"} right-0 z-10 transform transition-all duration-500 ease-in-out bg-[#f8f8f8c6] min-w-80 min-h-screen absolute`}>
         <div onClick={(() => setUserInformation(true))} className="flex justify-start p-2 hover:cursor-pointer relative items-center gap-1">
           <Image src={"/images/logo.png"} alt="Logo" className="w-14 h-14 bg-slate-300 rounded-full" width={56} height={56} />
           <p className="text-lg">امیرحسین برفر</p>
           <svg className={`${userInformation ? 'rotate-180' : ""} transform`} width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 9.17C16.8126 8.98375 16.5592 8.87921 16.295 8.87921C16.0308 8.87921 15.7774 8.98375 15.59 9.17L12 12.71L8.46001 9.17C8.27265 8.98375 8.0192 8.87921 7.75501 8.87921C7.49082 8.87921 7.23737 8.98375 7.05001 9.17C6.95628 9.26297 6.88189 9.37357 6.83112 9.49543C6.78035 9.61729 6.75421 9.74799 6.75421 9.88C6.75421 10.012 6.78035 10.1427 6.83112 10.2646C6.88189 10.3864 6.95628 10.497 7.05001 10.59L11.29 14.83C11.383 14.9237 11.4936 14.9981 11.6154 15.0489C11.7373 15.0997 11.868 15.1258 12 15.1258C12.132 15.1258 12.2627 15.0997 12.3846 15.0489C12.5064 14.9981 12.617 14.9237 12.71 14.83L17 10.59C17.0937 10.497 17.1681 10.3864 17.2189 10.2646C17.2697 10.1427 17.2958 10.012 17.2958 9.88C17.2958 9.74799 17.2697 9.61729 17.2189 9.49543C17.1681 9.37357 17.0937 9.26297 17 9.17Z" fill="black" /></svg>
         </div>
         {userInformation &&
-          <div className='duration-300 ease-in-out z-20 transform w-96 h-[430px] bg-white border-2 p-4 shadow-xl rounded-lg right-5 absolute top-24'>
+          <div className='duration-300 ease-in-out z-20 transform w-96 max-sm:w-80 h-[430px] bg-white border-2 p-4 shadow-xl rounded-lg right-5 absolute top-24'>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-lg text-center"> اطلاعات کاربری</h1>
               <svg onClick={() => setUserInformation(false)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
             </div>
             <form action="" className="flex justify-start items-center flex-col gap-2">
               <label htmlFor="profileImg">
-              <Image src={"/images/logo.png"} alt="Logo" className="rounded-full shadow-xl size-24" width={56} height={56} />
+                <Image src={"/images/logo.png"} alt="Logo" className="rounded-full shadow-xl size-24 max-sm:size-20 max-sm:mb-2" width={56} height={56} />
               </label>
               <input id="profileImg" className="hidden" type="file" required />
               <input className="w-full p-2 h-11 rounded-lg border-[#ddd] border-2 input input-sm" type="text" required placeholder="تغییر اسم :" />
               <input className="w-full p-2 h-11 rounded-lg border-[#ddd] border-2 input input-sm" type="email" required placeholder="تغییر ایمیل :" />
               <input className="w-full p-2 h-11 rounded-lg border-[#ddd] border-2 input input-sm" type="password" required placeholder="تغییر رمز عبور :" />
-              <button className="w-full h-11 bg-blue-500 rounded-lg text-white">ثبت تغییرات</button>
+              <button className="w-full h-11 bg-blue-500 rounded-lg text-white max-sm:h-9 mt-2">ثبت تغییرات</button>
             </form>
-              <button onClick={logout} className="w-full h-11 bg-red-500 rounded-lg text-white">خروج از حساب کاربری</button>
+            <button onClick={logout} className="w-full h-11 bg-red-500 rounded-lg text-white max-sm:h-9 mt-2">خروج از حساب کاربری</button>
           </div>
         }
-        <div className="mt-10 p-2 flex justify-start items-start flex-col gap-5 text-lg">
+        <div className="mt-10 p-2 flex justify-start items-start flex-col gap-5 text-lg max-sm:text-base">
           <div onClick={() => setActiveTab(<CreateTask handelBack={(e: unknown) => parentHandelBack(e)} />)} className="flex justify-start items-center gap-1 cursor-pointer">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_28_109)">  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H13V17H11V13H7V11H11V7H13V11H17V13Z" fill="#FF2C2C" /></g><defs>  <clipPath id="clip0_28_109"><rect width="24" height="24" fill="white" /></clipPath></defs></svg>
             <h2>اضافه کردن تسک جدید</h2>
@@ -119,7 +120,7 @@ export default function Page() {
             <form className="w-72 h-44 border-2 border-[#ddd] text-sm p-5 z-10 absolute rounded-lg gap-5 flex mt-5 flex-col">
               <div className="flex justify-between items-center">
                 <h2>چه دسته بندی ای اضافه کنیم؟</h2>
-                <svg onClick={()=>setNewCategory(false)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
+                <svg onClick={() => setNewCategory(false)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
               </div>
               <input type="text" required className="input border-2 border-[#ddd] w-full text-sm" />
               <button className="w-full bg-blue-500 h-12 text-white rounded-lg">اضافه کردن</button>
@@ -127,8 +128,11 @@ export default function Page() {
           }
         </div>
       </div>
+        <div onClick={() => setMobileToggle((curr => !curr))} className={`transition-all transform duration-500 ease-in-out absolute z-10 ${mobileToggle ? 'rotate-180 right-80 ' : 'rotate-0 right-0'}`}>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.46 8.29C11.367 8.19627 11.2564 8.12188 11.1346 8.07111C11.0127 8.02034 10.882 7.9942 10.75 7.9942C10.618 7.9942 10.4873 8.02034 10.3654 8.07111C10.2436 8.12188 10.133 8.19627 10.04 8.29L7.04 11.29C6.94627 11.383 6.87188 11.4936 6.82111 11.6154C6.77034 11.7373 6.7442 11.868 6.7442 12C6.7442 12.132 6.77034 12.2627 6.82111 12.3846C6.87188 12.5064 6.94627 12.617 7.04 12.71L10.04 15.71C10.133 15.8037 10.2436 15.8781 10.3654 15.9289C10.4873 15.9797 10.618 16.0058 10.75 16.0058C10.882 16.0058 11.0127 15.9797 11.1346 15.9289C11.2564 15.8781 11.367 15.8037 11.46 15.71C11.5537 15.617 11.6281 15.5064 11.6789 15.3846C11.7297 15.2627 11.7558 15.132 11.7558 15C11.7558 14.868 11.7297 14.7373 11.6789 14.6154C11.6281 14.4936 11.5537 14.383 11.46 14.29L9.16 12L11.46 9.71C11.5537 9.61704 11.6281 9.50644 11.6789 9.38458C11.7297 9.26272 11.7558 9.13201 11.7558 9C11.7558 8.86799 11.7297 8.73728 11.6789 8.61542C11.6281 8.49356 11.5537 8.38296 11.46 8.29ZM14.66 12L17 9.71C17.1883 9.5217 17.2941 9.2663 17.2941 9C17.2941 8.7337 17.1883 8.4783 17 8.29C16.8117 8.1017 16.5563 7.99591 16.29 7.99591C16.0237 7.99591 15.7683 8.1017 15.58 8.29L12.58 11.29C12.4863 11.383 12.4119 11.4936 12.3611 11.6154C12.3103 11.7373 12.2842 11.868 12.2842 12C12.2842 12.132 12.3103 12.2627 12.3611 12.3846C12.4119 12.5064 12.4863 12.617 12.58 12.71L15.58 15.71C15.673 15.8037 15.7836 15.8781 15.9054 15.9289C16.0273 15.9797 16.158 16.0058 16.29 16.0058C16.422 16.0058 16.5527 15.9797 16.6746 15.9289C16.7964 15.8781 16.907 15.8037 17 15.71C17.0937 15.617 17.1681 15.5064 17.2189 15.3846C17.2697 15.2627 17.2958 15.132 17.2958 15C17.2958 14.868 17.2697 14.7373 17.2189 14.6154C17.1681 14.4936 17.0937 14.383 17 14.29L14.66 12Z" fill="black" /></svg>
+        </div>
       <div className="w-full min-h-screen relative">
-        {activeTab ? activeTab : <h2 className="text-3xl flex justify-center items-center font-gofteh my-80">خوش آمدی امیر عزیز برای شروع از پنل سمت راست یک گزینه انتخاب کن :)</h2>}
+        {activeTab ? activeTab : <h2 className="text-2xl max-lg:text-xl flex justify-center items-center font-gofteh my-80 max-sm:text-base max-sm:text-center max-sm:px-5">خوش آمدی امیر عزیز برای شروع از پنل سمت راست یک گزینه انتخاب کن :)</h2>}
       </div>
     </div>
 
