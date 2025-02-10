@@ -1,13 +1,10 @@
 "use client";
 
 import CreateTask from "@/components/tabs/createTask";
-import Today from "@/components/tabs/today";
-import Charts from '@/components/tabs/Charts'
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { RetroGrid } from '@/components/magicui/retro-grid'
-import Image from "next/image";
 
 export default function Page() {
 
