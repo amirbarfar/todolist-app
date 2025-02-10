@@ -12,6 +12,7 @@ export default function Page() {
 
   const [token, setToken] = useState<string | null>(null);
   const [name, setName] = useState<string | null>(null);
+  const provider = 'JYozs70KBkJJmNsmPJIjiRdKmmPd3f'
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -32,7 +33,7 @@ export default function Page() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Provider: "JYozs70KBkJJmNsmPJIjiRdKmmPd3f",
+        Provider: provider,
         Authorization: `Bearer ${token}`
       },
     })
@@ -63,7 +64,7 @@ export default function Page() {
       <div className="p-3">
         <div className="flex justify-between items-center">
           <h1 className="font-gofteh text-xl max-sm:text-base">خوش اومدی {name} عزیز !</h1>
-          <button className="w-44 h-11 bg-red-500 max-sm:w-36 max-sm:h-10 max-sm:text-base text-white rounded-lg font-gofteh">خروج از حساب</button>
+          <button onClick={logout} className="w-44 h-11 bg-red-500 max-sm:w-36 max-sm:h-10 max-sm:text-base text-white rounded-lg font-gofteh">خروج از حساب</button>
         </div>
         <div className="flex justify-start items-start max-sm:mt-2">
           <svg onClick={() => setToggleBtn((cur) => !cur)} className={`${toggleBtn ? 'rotate-180 scale-100' : 'rotate-0 scale-80'} transition-all absolute transform duration-500 ease-in-out w-10 h-10 rounded-full bg-white border-2`} width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
