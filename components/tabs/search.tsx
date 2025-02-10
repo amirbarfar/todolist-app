@@ -1,4 +1,8 @@
-export default function Search(props: any) {
+interface SearchProps {
+    handelBack: (value: boolean) => void;
+}
+
+export default function Search(props: SearchProps) {
     return (
         <div className="absolute bg-white min-h-screen py-10 px-12">
             <div className="mb-5">

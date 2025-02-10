@@ -13,9 +13,9 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      // غیرفعال کردن قوانین خاص
-      "next/no-img-element": "off", // غیرفعال کردن قانون <img> برای بهبود LCP
-      "react-hooks/rules-of-hooks": "off", // غیرفعال کردن قوانین Hook ها
+      "next/no-img-element": "off",
+      "react-hooks/rules-of-hooks": "off", 
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 ];

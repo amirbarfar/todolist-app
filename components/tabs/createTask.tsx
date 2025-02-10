@@ -1,6 +1,10 @@
 import React from 'react'
 
-export default function CreateTask(props: any) {
+interface CreateTaskProps {
+    handelBack: (value: boolean) => void;
+}
+
+export default function CreateTask(props: CreateTaskProps) {
     return (
         <div className="w-full min-h-screen absolute py-10 px-12">
             <div className="mb-5">
