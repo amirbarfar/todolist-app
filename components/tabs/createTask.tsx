@@ -6,15 +6,15 @@ interface CreateTaskProps {
 
 export default function CreateTask(props: CreateTaskProps) {
     return (
-        <div className="w-full min-h-screen absolute py-10 px-12 max-sm:px-5">
-            <div className="mb-5">
+        <div className="max-sm:px-5">
+            <div className='flex justify-end items-end'>
                 <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
             </div>
             <div>
-                <form action="" className='flex justify-center items-center flex-col flex-wrap gap-10'>
+                <form action="" className='flex justify-start items-center flex-col flex-wrap gap-10'>
                     <div className='flex justify-start items-start flex-col gap-3'>
                         <label htmlFor="">اسم تسکتو بنویس :</label>
-                        <input required type="text" className='w-96 max-sm:w-80  max-sm:w-80h-10 p-3 border-2 rounded-lg border-[#ddd]' />
+                        <input required type="text" className='w-96 max-sm:w-80 h-10 p-3 border-2 rounded-lg border-[#ddd]' />
                     </div>
                     <div className='flex justify-center items-center flex-wrap gap-5 gap-x-2'>
                         <div className='flex justify-start items-start flex-col gap-3'>
@@ -23,7 +23,7 @@ export default function CreateTask(props: CreateTaskProps) {
                         </div>
                         <div className='flex justify-start items-start flex-col gap-3'>
                             <label htmlFor="">دسته بندی هات :</label>
-                            <select required className="w-96 h-12 max-sm:w-80 h-10 border-2 rounded-lg  border-[#ddd]">
+                            <select required className="w-96 max-sm:w-80 h-10 border-2 rounded-lg  border-[#ddd]">
                                 <option>کار</option>
                                 <option>درس</option>
                                 <option>تست</option>
