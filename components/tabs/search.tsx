@@ -1,4 +1,4 @@
-export default function tab2(props: any) {
+export default function Search(props: any) {
     return (
         <div className="absolute bg-white min-h-screen py-10 px-12">
             <div className="mb-5">
