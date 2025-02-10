@@ -12,7 +12,7 @@ export default {
   	extend: {
   		fontFamily: {
   			pelak: 'pelak',
-			gofteh : 'gofteh'
+  			gofteh: 'gofteh'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
