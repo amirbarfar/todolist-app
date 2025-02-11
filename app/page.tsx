@@ -17,7 +17,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Provider: "JYozs70KBkJJmNsmPJIjiRdKmmPd3f",
+        Provider: "oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ",
         Authorization: `Bearer ${token}`
       }
     })
@@ -36,7 +36,6 @@ export default function Home() {
 
 
     <div>
-      <span className="loader"></span>
       <RetroGrid />
       <div className="font-gofteh flex justify-center items-center flex-col mx-auto w-96 py-60">
         <Image src="/images/logo.png" className="w-52 mb-10" width={200} height={200} alt="logo" />
