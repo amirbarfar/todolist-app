@@ -25,7 +25,7 @@ export default function Page() {
         router.push('/login');
       }
     }
-  }, []);
+  }, [router]);
 
   async function logout() {
     const response = await fetch(('https://todo.zmat24.ir/api/logout'), {

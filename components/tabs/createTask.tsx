@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 
 interface CreateTaskProps {
@@ -71,7 +71,7 @@ export default function CreateTask(props: CreateTaskProps) {
 
     const [dataCategory, setDataCategory] = useState<CategoryType[]>([])
 
-    async function getCategory() {
+    const getCategory = useCallback(async () => {
         const response = await fetch('https://todo.zmat24.ir/api/category', {
             method: 'GET',
             headers: {
@@ -90,10 +90,9 @@ export default function CreateTask(props: CreateTaskProps) {
         } else {
             toast.error('متاسفانه دسته بندی هارو پیدا نکردیم :(')
         }
-    }
-    useEffect(() => {
-        getCategory()
-    }, [])
+    }, [token])
+
+    getCategory()
 
 
     return (
@@ -114,8 +113,8 @@ export default function CreateTask(props: CreateTaskProps) {
                     <label>دسته بندی ها :</label>
                     <select value={category} name="category" className='border-2 rounded-lg text-lg my-2 h-10' onChange={(event) => setCategory(event.target.value)}>
                         {dataCategory.map((item) =>
-                        <option key={item.id}>{item.name}</option>
-                    )}
+                            <option key={item.id}>{item.name}</option>
+                        )}
                     </select>
                 </div>
                 <div className='mt-10 flex flex-col col-start-4 col-end-7 mr-2 max-sm:mt-5 max-lg:col-start-2 max-lg:col-end-7 max-sm:col-start-1 max-sm:col-end-13'>

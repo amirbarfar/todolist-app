@@ -1,55 +1,55 @@
-import { useState , useEffect } from "react"
+import { useState, useEffect } from "react"
 import toast from "react-hot-toast"
 
 interface CreateCategoryProps {
-    handelBack : (value : boolean) => void
+    handelBack: (value: boolean) => void
 }
 
-export default function createCategory(props : CreateCategoryProps) {
+export default function createCategory(props: CreateCategoryProps) {
 
-    const [token , setToken] = useState('')
+    const [token, setToken] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
         if (window !== undefined) {
-            const res : string = localStorage.getItem('token') || ''
+            const res: string = localStorage.getItem('token') || ''
             setToken(res)
         }
-    } , [])
-    
-    
-    const [nmaeCategory , setNameCategory] = useState<string>('')
+    }, [])
+
+
+    const [nmaeCategory, setNameCategory] = useState<string>('')
     // const [iconCategory , setIconCategory] = useState<string>('')
-    
+
 
     interface DataType {
-        name : string,
+        name: string,
         // icon : string
     }
 
-    async function addCategory(event : React.MouseEvent<HTMLFormElement>){
+    async function addCategory(event: React.MouseEvent<HTMLFormElement>) {
         event.preventDefault()
 
         const formData = new FormData(event?.currentTarget);
 
-        const dataUser : DataType = {
-            name : formData.get('name') as string,
+        const dataUser: DataType = {
+            name: formData.get('name') as string,
         }
 
-        const response = await fetch('https://todo.zmat24.ir/api/category/create' , {
-            method : 'POST' ,
-            headers : {
-                'Content-Type' : 'application/json',
-                Accept : 'application/json',
-                Provider : 'oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ',
-                Authorization : `Bearer ${token}`
+        const response = await fetch('https://todo.zmat24.ir/api/category/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Provider: 'oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ',
+                Authorization: `Bearer ${token}`
             },
-            body : JSON.stringify(dataUser)
+            body: JSON.stringify(dataUser)
         })
 
         if (response.ok) {
             toast.success('با موفقیت دسته بندی شما اضافه شد :)')
-            
-        }else{
+
+        } else {
             toast.error('متاسفانه دسته بندی اضافه نشد :(')
         }
     }
@@ -57,9 +57,12 @@ export default function createCategory(props : CreateCategoryProps) {
 
     return (
         <div>
+            <div className='col-start-10 col-end-12 max-sm:col-start-12 max-sm:col-end-13'>
+                <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
+            </div>
             <form action="" onSubmit={addCategory} className='grid grid-cols-12 font-pelak text-lg max-sm:text-sm max-sm:px-3'>
                 <div className='col-start-10 col-end-12 max-sm:col-start-12 max-sm:col-end-13'>
-                    <svg  width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
                 </div>
                 <div className='flex flex-col col-start-5 col-end-9 mt-10 max-lg:col-start-4 max-lg:col-end-10 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>نام دسته بندی : </label>
