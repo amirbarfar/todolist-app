@@ -7,39 +7,46 @@ interface CreateTaskProps {
 
 export default function CreateTask(props: CreateTaskProps) {
 
-    const [token, setToken] = useState('')
+    const [token, setToken] = useState('');
 
     useEffect(() => {
-        if (window !== undefined) {
-            const res: string = localStorage.getItem('token') || ''
+        const res = localStorage.getItem('token') || ''
+        if (res) {
             setToken(res)
+        } else {
+            console.log('token not :)')
         }
-    }, [])
+    }, [token])
 
     const [nmaeTask, setNameTask] = useState<string>('')
     const [description, setDescription] = useState<string>('')
     const [category, setCategory] = useState<string>('')
     const [flag, setFlag] = useState<string>('')
     const [time, setTime] = useState<string>('')
+    const [dataCategory, setDataCategory] = useState<CategoryType[]>([])
 
 
     interface DataType {
         title: string,
         description: string,
-        category: string,
+        category: number,
         flag: string,
         deadline: string
     }
 
+    
     async function addTask(event: React.MouseEvent<HTMLFormElement>) {
         event.preventDefault()
 
+        const test1 = dataCategory.find((item) => {
+            return item.name === category
+        })
         const formData = new FormData(event?.currentTarget);
 
         const dataUser: DataType = {
             title: formData.get('title') as string,
             description: formData.get('description') as string,
-            category: formData.get('category') as string,
+            category: test1 ? test1.id : 0,
             flag: formData.get('flag') as string,
             deadline: formData.get('deadline') as string
         }
@@ -52,7 +59,7 @@ export default function CreateTask(props: CreateTaskProps) {
                 Provider: 'oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ',
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify({ dataUser })
+            body: JSON.stringify( dataUser )
         })
 
         if (response.ok) {
@@ -69,9 +76,10 @@ export default function CreateTask(props: CreateTaskProps) {
         name: string;
     }
 
-    const [dataCategory, setDataCategory] = useState<CategoryType[]>([])
 
-    const getCategory = useCallback(async () => {
+
+    async function getCategory() {
+        if (!token) return
         const response = await fetch('https://todo.zmat24.ir/api/category', {
             method: 'GET',
             headers: {
@@ -85,14 +93,15 @@ export default function CreateTask(props: CreateTaskProps) {
         const res = await response.json()
 
         if (response.ok) {
-            toast.success('با موفقیت دسته بندی هارو گرفتیم :)')
             setDataCategory(res.categories)
         } else {
-            toast.error('متاسفانه دسته بندی هارو پیدا نکردیم :(')
+            console.error('')
         }
-    }, [token])
+    }
 
-    getCategory()
+    useEffect(() => {
+        getCategory()
+    }, [token])
 
 
     return (
@@ -127,7 +136,7 @@ export default function CreateTask(props: CreateTaskProps) {
                 </div>
                 <div className='col-start-7 col-end-10 mt-10 flex flex-col mx-2 max-sm:mt-5 max-lg:col-start-7 max-lg:col-end-12 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>زمان انجام تسک :</label>
-                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="date" className='p-2 text-sm h-10 border-2 my-2 rounded-lg' />
+                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="text" className='p-2 text-sm h-10 border-2 my-2 rounded-lg' />
                 </div>
                 <button className='bg-blue-600 h-10 text-white rounded-lg font-pelak text-base col-start-6 col-end-8 mt-20 max-lg:col-start-4 max-lg:col-end-9 max-sm:col-start-1 max-sm:col-end-13 max-sm:mt-10'>ثبت تیک :)</button>
             </form>
