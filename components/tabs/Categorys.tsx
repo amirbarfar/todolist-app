@@ -186,7 +186,7 @@ export default function Categorys(props: CreateCategoryProps) {
                 <div className='absolute z-20 w-96 max-sm:w-[370px] h-96 p-3 text-base rounded-lg bg-white translate-x-[50%] right-[50%] left-[50%] top-[20%] overflow-y-scroll' style={{ scrollbarWidth: 'none' }}>
                     {findIdTasks.tasks != '' ? (
                         findIdTasks.tasks.map((item: any) =>
-                            <div className='flex flex-col border-2 p-2 rounded-lg'>
+                            <div key={findIdTasks.id} className='flex flex-col border-2 p-2 rounded-lg'>
                                 <div className='flex justify-start items-start flex-col'>
                                     <h1 className='h-10'>نام تسک : {item.title}</h1>
                                     <p className='h-10'>درباره تسک : {item.description}</p>

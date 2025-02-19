@@ -40,7 +40,7 @@ export default function Tasks(props: CreateTasksProps) {
 
     useEffect(() => {
         getTasks()
-    }, [token])
+    }, [token]) 
 
     const [editTask, setEditTask] = useState(false)
     const [idEditTask, setIdEditTask] = useState()
