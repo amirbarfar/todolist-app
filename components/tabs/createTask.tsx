@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import useCategoryStore from '@/app/Store';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface CreateTaskProps {
@@ -8,107 +9,96 @@ interface CreateTaskProps {
 export default function CreateTask(props: CreateTaskProps) {
 
     const [token, setToken] = useState('');
+    const { categories, loading, error, fetchCategories } = useCategoryStore(); // 🔹 اینجا useCategoryStore را مستقیماً فراخوانی کردیم
 
     useEffect(() => {
-        const res = localStorage.getItem('token') || ''
+        const res = localStorage.getItem('token') || '';
         if (res) {
-            setToken(res)
+            setToken(res);
         } else {
-            console.log('token not :)')
+            console.log('token not :)');
         }
-    }, [token])
+    }, []);
 
-    const [nmaeTask, setNameTask] = useState<string>('')
-    const [description, setDescription] = useState<string>('')
-    const [category, setCategory] = useState<string>('')
-    const [flag, setFlag] = useState<string>('')
-    const [time, setTime] = useState<string>('')
-    const [dataCategory, setDataCategory] = useState<CategoryType[]>([])
+    const [nmaeTask, setNameTask] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
+    const [flag, setFlag] = useState<string>('');
+    const [time, setTime] = useState<string>('');
+    const [dataCategory, setDataCategory] = useState<CategoryType[]>([]);
 
-
-    interface DataType {
-        title: string,
-        description: string,
-        category: number,
-        flag: string,
-        deadline: string
+    interface CategoryType {
+        id: number;
+        name: string;
+        icon: string;
     }
 
-    
-    async function addTask(event: React.MouseEvent<HTMLFormElement>) {
-        event.preventDefault()
+    interface DataType {
+        title: string;
+        description: string;
+        category: number;
+        flag: string;
+        deadline: string;
+    }
 
-        const test1 = dataCategory.find((item) => {
-            return item.name === category
-        })
-        const formData = new FormData(event?.currentTarget);
+    async function addTask(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const selectedCategory = dataCategory.find((item) => item.name === category);
+        const formData = new FormData(event.currentTarget);
 
         const dataUser: DataType = {
             title: formData.get('title') as string,
             description: formData.get('description') as string,
-            category: test1 ? test1.id : 0,
+            category: selectedCategory ? selectedCategory.id : 0,
             flag: formData.get('flag') as string,
             deadline: formData.get('deadline') as string
-        }
+        };
 
         const response = await fetch('https://todo.zmat24.ir/api/task/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ',
+                Provider: 'bWEyOKcqYJkNBHuGLkYXbCXrIX8Nc9',
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify( dataUser )
-        })
+            body: JSON.stringify(dataUser)
+        });
 
         if (response.ok) {
-            toast.success('با موفقیت تسک شما اضافه شد :)')
-
+            toast.success('با موفقیت تسک شما اضافه شد :)');
         } else {
-            toast.error('متاسفانه تسک اضافه نشد :(')
-
-        }
-    }
-
-    interface CategoryType {
-        id: number;
-        name: string;
-    }
-
-
-
-    async function getCategory() {
-        if (!token) return
-        const response = await fetch('https://todo.zmat24.ir/api/category', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Provider: 'oNfYjDaXnAlHTl4NCv6lFxsth0zZfJ',
-                Authorization: `Bearer ${token}`
-            },
-        })
-
-        const res = await response.json()
-
-        if (response.ok) {
-            setDataCategory(res.categories)
-        } else {
-            console.error('')
+            toast.error('متاسفانه تسک اضافه نشد :(');
         }
     }
 
     useEffect(() => {
-        getCategory()
-    }, [token])
+        if (token) {
+            fetchCategories(token);
+        }
+    }, [token, fetchCategories]);
 
+    useEffect(() => {
+        if (!loading && !error && categories) {
+            setDataCategory(categories as CategoryType[]);
+        }
+    }, [categories, loading, error]);
 
     return (
         <div>
-            <form action="" className='grid grid-cols-12 font-pelak text-lg max-sm:text-sm max-sm:px-5' onSubmit={addTask}>
+            <form className='grid grid-cols-12 font-pelak text-lg max-sm:text-sm max-sm:px-5' onSubmit={addTask}>
                 <div className='col-start-10 col-end-12 max-sm:col-start-12 max-sm:col-end-13'>
-                    <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
+                    <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_28_60)">
+                            <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_28_60">
+                                <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
                 </div>
                 <div className='flex flex-col col-start-5 col-end-9 mt-10 max-sm:mt-5 max-lg:col-start-4 max-lg:col-end-10 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>نام تسک : </label>
@@ -116,7 +106,7 @@ export default function CreateTask(props: CreateTaskProps) {
                 </div>
                 <div className='col-start-4 col-end-7 mt-10 flex flex-col mx-2 max-sm:mt-5 max-lg:col-start-2 max-lg:col-end-7 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>درباره تسک :</label>
-                    <input name="description" value={description} onChange={(event) => setDescription(event.target.value)} type="text" className='my-2 p-2 text-sm h-10 border-2 rounded-lg' />
+                    <input maxLength={25} name="description" value={description} onChange={(event) => setDescription(event.target.value)} type="text" className='my-2 p-2 text-sm h-10 border-2 rounded-lg' />
                 </div>
                 <div className='mt-10 flex flex-col col-start-7 col-end-10 mr-2 max-sm:mt-5 max-lg:col-start-7 max-lg:col-end-12 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>دسته بندی ها :</label>
@@ -130,16 +120,16 @@ export default function CreateTask(props: CreateTaskProps) {
                     <label>میزان اهمیت :</label>
                     <select value={flag} name="flag" className='border-2 rounded-lg text-lg my-2 h-10' onChange={(event) => setFlag(event?.target.value)}>
                         <option value="low">low</option>
-                        <option value="hight">hight</option>
+                        <option value="high">high</option>
                         <option value="medium">medium</option>
                     </select>
                 </div>
                 <div className='col-start-7 col-end-10 mt-10 flex flex-col mx-2 max-sm:mt-5 max-lg:col-start-7 max-lg:col-end-12 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>زمان انجام تسک :</label>
-                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="text" className='p-2 text-sm h-10 border-2 my-2 rounded-lg' />
+                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="date" className='p-2 text-sm h-10 border-2 my-2 rounded-lg' />
                 </div>
                 <button className='bg-blue-600 h-10 text-white rounded-lg font-pelak text-base col-start-6 col-end-8 mt-20 max-lg:col-start-4 max-lg:col-end-9 max-sm:col-start-1 max-sm:col-end-13 max-sm:mt-10'>ثبت تیک :)</button>
             </form>
         </div>
-    )
+    );
 }
