@@ -44,8 +44,10 @@ const useCategoryStore = create(
             set({ error: 'مشکلی در دریافت اطلاعات رخ داد', loading: false });
           }
         } catch (error) {
+          console.log(error);
           set({ error: 'ارتباط با سرور ناموفق بود', loading: false });
         }
+        
       },
     }),
     { name: 'categories-storage' }

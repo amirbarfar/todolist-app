@@ -18,12 +18,12 @@ export default function createCategory(props: CreateCategoryProps) {
 
 
     const [nameCategory, setNameCategory] = useState<string>('')
-    const [iconCategory , setIconCategory] = useState<string>('')
+    // const [iconCategory , setIconCategory] = useState<string>('')
 
 
     interface DataType {
         name: string,
-        icon : string
+        // icon : string
     }
 
     async function addCategory(event: React.MouseEvent<HTMLFormElement>) {
@@ -33,7 +33,7 @@ export default function createCategory(props: CreateCategoryProps) {
 
         const dataUser: DataType = {
             name: formData.get('name') as string,
-            icon: formData.get('icon') as string
+            // icon: formData.get('icon') as string
         }
 
         const response = await fetch('https://todo.zmat24.ir/api/category/create', {
