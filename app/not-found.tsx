@@ -3,7 +3,7 @@ import Link from "next/link";
 // app/not-found.tsx
 export default function NotFound() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <div className="flex items-center justify-center min-h-screen font-pelak bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
       <div className="text-center p-8 md:p-16 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg">
         <h1 className="text-6xl font-extrabold mb-4">404</h1>
         <p className="text-xl mb-6">این صفحه پیدا نشد</p>

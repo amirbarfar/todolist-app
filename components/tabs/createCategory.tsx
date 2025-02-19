@@ -18,12 +18,11 @@ export default function createCategory(props: CreateCategoryProps) {
 
 
     const [nameCategory, setNameCategory] = useState<string>('')
-    // const [iconCategory , setIconCategory] = useState<string>('')
-
+    const [iconCategory , setIconCategory] = useState<string>('')
 
     interface DataType {
         name: string,
-        // icon : string
+        icon : string
     }
 
     async function addCategory(event: React.MouseEvent<HTMLFormElement>) {
@@ -33,7 +32,7 @@ export default function createCategory(props: CreateCategoryProps) {
 
         const dataUser: DataType = {
             name: formData.get('name') as string,
-            // icon: formData.get('icon') as string
+            icon: formData.get('icon') as string
         }
 
         const response = await fetch('https://todo.zmat24.ir/api/category/create', {
@@ -41,11 +40,15 @@ export default function createCategory(props: CreateCategoryProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bWEyOKcqYJkNBHuGLkYXbCXrIX8Nc9',
+                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(dataUser)
         })
+
+        const res = await response.json()
+        console.log(res);
+        
 
         if (response.ok) {
             toast.success('با موفقیت دسته بندی شما اضافه شد :)')
@@ -54,7 +57,7 @@ export default function createCategory(props: CreateCategoryProps) {
             toast.error('متاسفانه دسته بندی اضافه نشد :(')
         }
     }
-
+    
     return (
         <div>
             <form action="" onSubmit={addCategory} className='grid grid-cols-12 font-pelak text-lg max-sm:text-sm max-sm:px-3'>
@@ -65,9 +68,20 @@ export default function createCategory(props: CreateCategoryProps) {
                     <label>نام دسته بندی : </label>
                     <input name="name" value={nameCategory} type="text" onChange={(event) => setNameCategory(event?.target.value)} className='p-2 text-sm h-10 border-2 rounded-lg  my-2' />
                 </div>
-                <div className='flex flex-col col-start-5 col-end-9 mt-10 max-lg:col-start-4 max-lg:col-end-10 max-sm:col-start-1 max-sm:col-end-13'>
+                <div className='flex flex-col col-start-5 col-end-9 mt-5 max-lg:col-start-4 max-lg:col-end-10 max-sm:col-start-1 max-sm:col-end-13'>
                     <label> آیکون دسته بندی : </label>
-                    <input name="icon" type="text" className='p-2 text-sm h-10 border-2 rounded-lg  my-2' />
+                    <input name="icon" type="text" value={iconCategory} className='p-2 text-2xl h-10 border-2 rounded-lg my-2' />
+                    <div className="flex justify-center items-center flex-wrap mt-5" onClick={(event) => setIconCategory((event.target as HTMLSpanElement).innerText)}>
+                        <span className="text-3xl cursor-pointer">🏡</span>
+                        <span className="text-3xl cursor-pointer">💪</span>
+                        <span className="text-3xl cursor-pointer">📱</span>
+                        <span className="text-3xl cursor-pointer">💰</span>
+                        <span className="text-3xl cursor-pointer">✈️</span>
+                        <span className="text-3xl cursor-pointer">🎨</span>
+                        <span className="text-3xl cursor-pointer">📚</span>
+                        <span className="text-3xl cursor-pointer">🚗</span>
+                        <span className="text-3xl cursor-pointer">🍔</span>
+                    </div>
                 </div>
                 <button className='bg-blue-600 h-10 text-white rounded-lg font-pelak text-base col-start-6 col-end-8 mt-20 max-lg:col-start-4 max-lg:col-end-10 max-sm:col-start-1 max-sm:col-end-13 max-sm:mt-10'>ساخت دسته بندی :)</button>
             </form>

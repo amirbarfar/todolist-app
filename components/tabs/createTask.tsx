@@ -9,7 +9,7 @@ interface CreateTaskProps {
 export default function CreateTask(props: CreateTaskProps) {
 
     const [token, setToken] = useState('');
-    const { categories, loading, error, fetchCategories } = useCategoryStore(); // 🔹 اینجا useCategoryStore را مستقیماً فراخوانی کردیم
+    const { categories, loading, error, fetchCategories } = useCategoryStore();
 
     useEffect(() => {
         const res = localStorage.getItem('token') || '';
@@ -60,7 +60,7 @@ export default function CreateTask(props: CreateTaskProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bWEyOKcqYJkNBHuGLkYXbCXrIX8Nc9',
+                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N', 
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(dataUser)
@@ -126,7 +126,7 @@ export default function CreateTask(props: CreateTaskProps) {
                 </div>
                 <div className='col-start-7 col-end-10 mt-10 flex flex-col mx-2 max-sm:mt-5 max-lg:col-start-7 max-lg:col-end-12 max-sm:col-start-1 max-sm:col-end-13'>
                     <label>زمان انجام تسک :</label>
-                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="date" className='p-2 text-sm h-10 border-2 my-2 rounded-lg' />
+                    <input name="deadline" value={time} onChange={(event) => setTime(event?.target.value)} type="date" className='p-2 text-sm h-10 w-full border-2 my-2 rounded-lg' />
                 </div>
                 <button className='bg-blue-600 h-10 text-white rounded-lg font-pelak text-base col-start-6 col-end-8 mt-20 max-lg:col-start-4 max-lg:col-end-9 max-sm:col-start-1 max-sm:col-end-13 max-sm:mt-10'>ثبت تیک :)</button>
             </form>

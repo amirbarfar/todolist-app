@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { RetroGrid } from '@/components/magicui/retro-grid'
 import Tasks from "@/components/tabs/Tasks";
+import Categorys from "@/components/tabs/Categorys";
 
 export default function Page() {
 
@@ -34,7 +35,7 @@ export default function Page() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Provider: 'bWEyOKcqYJkNBHuGLkYXbCXrIX8Nc9',
+        Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
         Authorization: `Bearer ${token}`,
       },
     })
@@ -75,7 +76,7 @@ export default function Page() {
             <li onClick={() => setActiveTab(<CreateTask handelBack={(e: unknown) => res(e)} />)} className="cursor-pointer">اضافه کردن تسک ✒️</li>
             <li onClick={() => setActiveTab(<CreateCategory handelBack={(e:unknown) => res(e)}/>)} className="cursor-pointer">اضافه کردن دسته بندی ✏️</li>
             <li onClick={() => setActiveTab(<Tasks handelBack={(e:unknown) => res(e)} />)} className="cursor-pointer">تسک ها 📒</li>
-            <li className="cursor-pointer">دسته بندی ها 📚</li>
+            <li onClick={() => setActiveTab(<Categorys handelBack={(e : unknown) => res(e)}/>)} className="cursor-pointer">دسته بندی ها 📚</li>
             <li className="cursor-pointer">نمودار پیشرفت 📊</li>
           </ul>
           <div className="w-full font-gofteh text-xl my-5 rounded-lg max-sm:text-base">
