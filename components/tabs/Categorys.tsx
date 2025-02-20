@@ -18,7 +18,7 @@ export default function Categorys(props: CreateCategoryProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`,
             }
         })
@@ -78,7 +78,7 @@ export default function Categorys(props: CreateCategoryProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(dataEditCategory)
@@ -100,7 +100,7 @@ export default function Categorys(props: CreateCategoryProps) {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             },
         })
@@ -116,18 +116,18 @@ export default function Categorys(props: CreateCategoryProps) {
     }
 
     return (
-        <div className=''>
-            <div className='flex justify-end mx-20 max-sm:mx-5'>
+        <div className='grid grid-cols-12 px-3'>
+            <div className='-mt-3 col-start-10 col-end-13 max-sm:col-start-12'>
                 <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
             </div>
-            <div className='mt-10 flex justify-center items-start gap-5 flex-wrap overflow-y-scroll h-[580px]' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className='col-start-3 col-end-11 max-sm:col-start-1 max-sm:col-end-13 mt-10 flex justify-center items-start gap-5 flex-wrap overflow-y-scroll h-[580px]' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 <label onClick={() => setEditCategoryToggle(false)} className={`${editCategoryToggle ? 'black' : 'hidden'} z-20 transform opacity-50 bg-black absolute w-dvw h-dvh top-0 right-0`}></label>
                 <label onClick={() => setDeleltCategoryToggle(false)} className={`${deleteCategoryToggle ? 'black' : 'hidden'} z-20 transform opacity-50 bg-black absolute w-dvw h-dvh top-0 right-0`}></label>
                 <label onClick={() => setGetTasksToggle(false)} className={`${getTasksToggle ? 'black' : 'hidden'} z-20 transform opacity-50 bg-black absolute w-dvw h-dvh top-0 right-0`}></label>
 
                 {
                     data.map((item) => (
-                        <div key={item.id} className='w-96 h-60 max-sm:h-52 z-10 border-2 max-sm:w-full max-sm:mx-5 bg-white rounded-lg flex justify-start items-start flex-col p-2'>
+                        <div key={item.id} className='w-60 h-60 z-10 border-2 max-sm:w-full max-sm:mx-1 bg-white rounded-lg flex justify-start items-start flex-col p-2'>
                             <div className='flex justify-start items-start flex-col px-4'>
                                 <span className='text-4xl h-8'>{item.icon}</span>
                                 <div className='mt-5 text-base'>
@@ -135,17 +135,17 @@ export default function Categorys(props: CreateCategoryProps) {
                                     <p>تعداد : {item.tasks.length}</p>
                                 </div>
                             </div>
-                            <div className='flex justify-center items-center flex-wrap mt-5 text-sm gap-2'>
-                                <button onClick={() => { setEditCategoryToggle(true); setGetIdEdit(item.id) }} className='w-24 h-9 bg-blue-500 rounded-lg text-white'>ویرایش کردن</button>
-                                <button onClick={() => { setDeleltCategoryToggle(true); setGetIdDelete(item.id) }} className='w-24 h-9 bg-red-500 rounded-lg text-white'>حذف کردن</button>
-                                <button onClick={() => { setGetTasksToggle(true); setGetIdTasks(item.id) }} className='w-24 h-9 bg-green-500 rounded-lg text-white'> نمایش تسک ها</button>
+                            <div className='flex justify-center items-center flex-wrap mt-5 mx-2 text-sm gap-1'>
+                                <button onClick={() => { setEditCategoryToggle(true); setGetIdEdit(item.id) }} className='w-24 h-9 bg-blue-500 rounded-lg text-white max-sm:w-36'>ویرایش کردن</button>
+                                <button onClick={() => { setDeleltCategoryToggle(true); setGetIdDelete(item.id) }} className='w-24 h-9 bg-red-500 rounded-lg text-white max-sm:w-36'>حذف کردن</button>
+                                <button onClick={() => { setGetTasksToggle(true); setGetIdTasks(item.id) }} className='w-24 h-9 bg-green-500 rounded-lg text-white max-sm:w-36'> نمایش تسک ها</button>
                             </div>
                         </div>
                     ))
                 }
                 {
                     editCategoryToggle &&
-                    <div className='absolute translate-x-[50%] left-[50%] top-[20%] right-[50%] z-20 w-96 max-sm:w-80 h-96 border-2 bg-white p-5 max-sm:px-1 rounded-lg py-10'>
+                    <div className='absolute translate-x-[50%] left-[50%] top-[20%] right-[50%] z-20 w-96 max-sm:w-80 h-96 border-2 bg-white p-5 max-sm:px-1 rounded-lg py-8'>
                         <form onSubmit={(event) => editCategory(event)} className='font-pelak text-lg max-sm:text-sm max-sm:px-3'>
                             <div className='flex flex-col'>
                                 <label className='text-base'>نام دسته بندی : </label>
@@ -154,7 +154,7 @@ export default function Categorys(props: CreateCategoryProps) {
                             <div className='flex flex-col mt-3'>
                                 <label className='text-base'> آیکون دسته بندی : </label>
                                 <input name="icon" value={editIcon} type="text" className='p-2 text-2xl h-10 border-2 rounded-lg my-2' />
-                                <div className="flex justify-center gap-1 items-center flex-wrap mt-5" onClick={(event) => setEditIcon((event.target as HTMLSpanElement).innerText)}>
+                                <div className="flex justify-center gap-3 items-center flex-wrap mt-5" onClick={(event) => setEditIcon((event.target as HTMLSpanElement).innerText)}>
                                     <span className="text-2xl cursor-pointer">🏡</span>
                                     <span className="text-2xl cursor-pointer">💪</span>
                                     <span className="text-2xl cursor-pointer">📱</span>

@@ -26,7 +26,7 @@ export default function Page() {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Provider: "bGRQpZo9p8PE04BFZqFovJJ1JFEv8N",
+                    Provider: "atjts55opgIT3TtgRkOg8fuoB5mSWf",
                 },
                 body: JSON.stringify(userData)
             })

@@ -25,7 +25,7 @@ export default function Tasks(props: CreateTasksProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             }
         })
@@ -91,7 +91,7 @@ export default function Tasks(props: CreateTasksProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(putTaskData)
@@ -113,7 +113,7 @@ export default function Tasks(props: CreateTasksProps) {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             },
         })
@@ -136,7 +136,7 @@ export default function Tasks(props: CreateTasksProps) {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Provider: 'bGRQpZo9p8PE04BFZqFovJJ1JFEv8N',
+                Provider: 'atjts55opgIT3TtgRkOg8fuoB5mSWf',
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({ "is_do": toggleTasks })
@@ -155,16 +155,16 @@ export default function Tasks(props: CreateTasksProps) {
 
 
     return (
-        <div className='h-[650px] overflow-y-scroll' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className='h-[650px] overflow-y-scroll px-3' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <label onClick={() => setEditTask(false)} className={`${editTask ? 'block' : 'hidden'} absolute w-dvw h-dvh top-0 right-0 z-20 bg-black opacity-30`}></label>
             <label onClick={() => setDeleteTask(false)} className={`${deleteTask ? 'block' : 'hidden'} absolute w-dvw h-dvh top-0 right-0 z-20 bg-black opacity-30`}></label>
             <div className='grid grid-cols-12'>
-                <div className='col-start-10 col-end-12 max-sm:col-start-12 max-sm:col-end-13'>
+                <div className='col-start-10  max-lg:absolute z-20 left-3 col-end-12 max-sm:col-start-12 max-sm:col-end-13 max-sm:-mt-3'>
                     <svg onClick={() => props.handelBack(false)} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <g clipPath="url(#clip0_28_60)">    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#323232" />  </g>  <defs>    <clipPath id="clip0_28_60">      <rect width="24" height="24" fill="white" />    </clipPath>  </defs></svg>
                 </div>
                 {
                     dataTasks.map((item) => (
-                        <div key={item.id} className={`bg-[#ffffffac] flex z-10 justify-between items-center p-2 col-start-4 max-sm:text-sm text-base col-end-10 border-2 h-40 px-5 mt-14 max-lg:col-start-1 max-lg:col-end-13 max-sm:mx-3 font-pelak rounded-lg`}>
+                        <div key={item.id} className={` flex z-10 justify-between items-center p-2 col-start-4 max-sm:text-sm text-base col-end-10 border-2 h-40 px-6 mt-14 max-lg:col-start-1 max-lg:col-end-13 max-sm:mx-1 font-pelak rounded-lg`}>
                             <div className='flex flex-col'>
                                 <div className='flex justify-start items-start flex-col'>
                                     <h1 className='h-10'>نام تسک : {item.title}</h1>

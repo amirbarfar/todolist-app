@@ -17,7 +17,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Provider: "bGRQpZo9p8PE04BFZqFovJJ1JFEv8N",
+        Provider: "atjts55opgIT3TtgRkOg8fuoB5mSWf",
         Authorization: `Bearer ${token}`
       }
     })
